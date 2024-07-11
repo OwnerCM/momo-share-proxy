@@ -11,6 +11,8 @@ link = 'link'  # 设置link
 if environ.get('GITHUB_RUN_ID', None):
     link = environ['link']
 
+# 设置代理抓取https页面报错问题解决
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 async def create_aiohttp(url, proxy_list):
     global n
@@ -24,10 +26,10 @@ async def create_aiohttp(url, proxy_list):
 # 网页访问
 async def web_request(url, proxy, session):
     # 并发限制
-    async with Semaphore(5):
+    async with Semaphore(10):
         try:
             async with await session.get(url=url, headers=await getheaders(), proxy=proxy,
-                                         timeout=ClientTimeout(total=10)) as response:
+                                         timeout=ClientTimeout(total=20)) as response:
                 # 返回字符串形式的相应数据
                 page_source = await response.text()
                 await page(page_source)
