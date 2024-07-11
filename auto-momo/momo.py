@@ -1,4 +1,5 @@
 # encoding:utf-8
+import asyncio
 from os import environ
 from ip import listIP, getheaders, ip_main
 from asyncio import create_task, wait, Semaphore, run
