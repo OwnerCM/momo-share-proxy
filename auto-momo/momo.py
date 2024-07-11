@@ -43,7 +43,7 @@ async def page(page_source):
 
 
 def main():
-    print("访问链接：" + link)
+    print(f"访问链接：{link}")
     ip_main()  # 抓取代理
     run(create_aiohttp(link, listIP))
     print(f"墨墨分享链接访问成功{n}次。")
