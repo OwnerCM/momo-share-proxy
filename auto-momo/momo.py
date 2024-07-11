@@ -1,5 +1,4 @@
 # encoding:utf-8
-import asyncio
 from os import environ
 from ip import listIP, getheaders, ip_main
 from asyncio import create_task, wait, Semaphore, run
@@ -12,8 +11,6 @@ link = 'link'  # 设置link
 if environ.get('GITHUB_RUN_ID', None):
     link = environ['link']
 
-# 设置代理抓取https页面报错问题解决
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 async def create_aiohttp(url, proxy_list):
     global n
